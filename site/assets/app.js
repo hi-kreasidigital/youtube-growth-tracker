@@ -33,7 +33,7 @@
     { key: 'likes_pct', label: 'Likes %', fmt: fPct, pct: true },
     { key: 'endscreen_ctr', label: 'End-screen click rate', fmt: fPct, pct: true },
   ];
-  const NUMERIC = ['length_s', 'hype_points', 'likes_channel_avg', 'endscreen_channel_avg', 'impr_engaged_views', 'impr_avg_view_s', 'impr_watch_hours', 'impr_from_recs', ...METRICS.map((m) => m.key)];
+  const NUMERIC = ['shorts_viewed_pct', 'length_s', 'hype_points', 'likes_channel_avg', 'endscreen_channel_avg', 'impr_engaged_views', 'impr_avg_view_s', 'impr_watch_hours', 'impr_from_recs', ...METRICS.map((m) => m.key)];
 
   const state = { tab: 'channel', cat: 'All', video: null, cmpCat: 'All', metric: 'views', sort: { key: 'published', dir: -1 }, month: null };
   let DATA = { videos: [], breakdowns: [], channel: [] };
@@ -454,6 +454,74 @@
     const cols = [['Snapshot', (c) => fDate(c.snapshot_date)], ['Period', (c) => c.period || '—'], ['Views', (c) => fInt(c.views), 1], ['Watch hours', (c) => fHrs(c.watch_hours), 1], ['Subs gained', (c) => fSigned(c.subs_gained), 1], ['Total subs', (c) => fInt(c.subs_total), 1], ['YPP watch hrs', (c) => fHrs(c.ypp_watch_hours), 1], ['YPP Shorts (90d)', (c) => fInt(c.ypp_shorts_views), 1], ['Long-form views', (c) => fInt(c.videos_views), 1], ['Shorts views', (c) => fInt(c.shorts_views), 1]];
     const hr = el('tr'); cols.forEach(([h, , n]) => hr.appendChild(el('th', n ? 'num' : null, h))); t.tHead.replaceChildren(hr);
     t.tBodies[0].replaceChildren(...ch.slice().reverse().map((c) => { const tr = el('tr'); cols.forEach(([, f, n]) => tr.appendChild(el('td', n ? 'num' : null, f(c)))); return tr; }));
+    renderChecks();
+  }
+
+  // ---------- MONTHLY CHECKS ----------
+  // Targets from the Tara x Mattel goals: CTR ≥ 5%, avg % viewed ≥ 30%, Shorts viewed ≥ 50%,
+  // and monthly output of 4 long-form + 4 Shorts + 1 podcast. Months come from each video's publish date.
+  const CHECKS = { ctr: 0.05, avd: 0.30, shortsViewed: 0.50, cadence: { 'Long-form': 4, Shorts: 4, Podcast: 1 } };
+  const OK = '✅', WARN = '⚠️';
+
+  function monthlyChecks() {
+    const byMonth = {};
+    DATA.videos.forEach((v) => { if (v.published) (byMonth[v.published.slice(0, 7)] ||= []).push(v); });
+    const keys = Object.keys(byMonth).sort();
+    if (!keys.length) return [];
+    // every month from the first tracked upload to this month, so a month with no uploads still shows up
+    const months = [];
+    const now = new Date(); const end = `${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}`;
+    for (let [y, m] = keys[0].split('-').map(Number); ; m++) {
+      if (m > 12) { m = 1; y++; }
+      const k = `${y}-${String(m).padStart(2, '0')}`; months.push(k);
+      if (k >= end || months.length > 120) break;
+    }
+    return months.reverse().map((k) => {
+      const vs = byMonth[k] || [];
+      const lf = vs.filter((v) => v.category === 'Long-form');
+      const sh = vs.filter((v) => v.category === 'Shorts');
+      const counts = { 'Long-form': lf.length, Shorts: sh.length, Podcast: vs.filter((v) => v.category === 'Podcast').length };
+      // CTR weighted by impressions where known, otherwise a plain average
+      const withImp = lf.filter((v) => v.ctr != null && v.impressions);
+      const ctrList = lf.map((v) => v.ctr).filter((x) => x != null);
+      const ctr = withImp.length ? withImp.reduce((s, v) => s + v.ctr * v.impressions, 0) / withImp.reduce((s, v) => s + v.impressions, 0) : avg(ctrList);
+      const avd = avg(lf.map((v) => v.avg_pct_viewed).filter((x) => x != null));
+      const sv = avg(sh.map((v) => v.shorts_viewed_pct).filter((x) => x != null));
+      const cadenceMet = Object.entries(CHECKS.cadence).every(([c, n]) => counts[c] >= n);
+      return { month: k, inProgress: k === end, counts, ctr, avd, sv, cadenceMet };
+    });
+  }
+
+  function renderChecks() {
+    let sec = document.getElementById('monthly-checks');
+    if (!sec) {
+      sec = el('div', 'section'); sec.id = 'monthly-checks';
+      sec.innerHTML = '<div class="eyebrow"><svg><use href="#waves"/></svg>Monthly checks</div><h2>Did each month hit the targets?</h2>' +
+        '<div class="muted">CTR 5%+ and average view duration 30%+ (long-form) · Shorts viewed 50%+ · cadence 4 long-form, 4 Shorts, 1 podcast. Each month counts the videos published in it.</div>' +
+        '<div class="card"><div class="tablebox"><table id="checks-table"><thead></thead><tbody></tbody></table></div></div>';
+      const body = document.getElementById('channel-body');
+      const snapCard = document.getElementById('snap-table')?.closest('.card');
+      body.insertBefore(sec, snapCard || null);
+    }
+    const rows = monthlyChecks();
+    const t = document.getElementById('checks-table');
+    const hr = el('tr');
+    ['Month', 'Long-form · Shorts · Podcast', 'CTR', 'Avg view duration', 'Shorts viewed', 'Cadence'].forEach((h, i) => hr.appendChild(el('th', i > 1 ? 'num' : null, h)));
+    t.tHead.replaceChildren(hr);
+    if (!rows.length) { const tr = el('tr'); const td = el('td', 'muted', 'No videos tracked yet.'); td.colSpan = 6; tr.appendChild(td); t.tBodies[0].replaceChildren(tr); return; }
+    const mark = (v, target) => (v == null ? '— no data' : `${v >= target ? OK : WARN} ${fPct(v)}`);
+    t.tBodies[0].replaceChildren(...rows.map((r) => {
+      const tr = el('tr');
+      const mTd = el('td', null, fMonth(r.month + '-01')); if (r.inProgress) mTd.appendChild(el('span', 'muted', ' · in progress'));
+      tr.appendChild(mTd);
+      tr.appendChild(el('td', null, `${r.counts['Long-form']}/4 · ${r.counts.Shorts}/4 · ${r.counts.Podcast}/1`));
+      [[r.ctr, CHECKS.ctr], [r.avd, CHECKS.avd], [r.sv, CHECKS.shortsViewed]].forEach(([v, tg]) => {
+        const td = el('td', 'num', mark(v, tg)); if (v != null && v < tg) td.style.color = css('--red'); tr.appendChild(td);
+      });
+      const cd = el('td', 'num', r.cadenceMet ? `${OK} Met` : `${WARN} Short`); if (!r.cadenceMet) cd.style.color = css('--red');
+      tr.appendChild(cd);
+      return tr;
+    }));
   }
 
   let rt;
