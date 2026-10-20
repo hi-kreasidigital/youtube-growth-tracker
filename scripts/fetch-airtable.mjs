@@ -19,7 +19,7 @@ const MAPS = {
     'End screen CTR': 'endscreen_ctr', 'End screen channel avg': 'endscreen_channel_avg',
     'Engaged views from impressions': 'impr_engaged_views', 'Avg view from impressions (s)': 'impr_avg_view_s',
     'Watch hours from impressions': 'impr_watch_hours', 'Impressions from recommendations': 'impr_from_recs',
-    'Hype points': 'hype_points', Notes: 'notes',
+    'Hype points': 'hype_points', 'Shorts viewed %': 'shorts_viewed_pct', Notes: 'notes',
   },
   Breakdowns: {
     Key: 'key', Scope: 'scope', 'Video ID': 'video_id', 'Snapshot date': 'snapshot_date', Group: 'group', Label: 'label', Share: 'share', Rank: 'rank',
