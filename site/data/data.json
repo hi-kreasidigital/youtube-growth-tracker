@@ -1,0 +1,262 @@
+{
+ "generated_at": "2026-10-20T14:00:00Z",
+ "sample": true,
+ "videos": [
+  {
+   "video_id": "2026-10-10-after-9-years",
+   "title": "After 9 Years of Moving Around, We Finally Have a Home | A Day in Our Life",
+   "category": "Long-form",
+   "published": "2026-10-10",
+   "snapshot": "2026-10-20",
+   "length_s": 182,
+   "views": 503,
+   "watch_hours": 1.6,
+   "subscribers": 1,
+   "impressions": 1400,
+   "ctr": 0.038,
+   "unique_viewers": 64,
+   "engaged_views": 86,
+   "avg_view_s": 57,
+   "avg_pct_viewed": 0.315,
+   "retention_30s": 0.48,
+   "likes_pct": 1.0,
+   "likes_channel_avg": 0.929,
+   "endscreen_ctr": 0.077,
+   "endscreen_channel_avg": 0.026,
+   "impr_engaged_views": 53,
+   "impr_avg_view_s": 46,
+   "impr_watch_hours": 0.68,
+   "impr_from_recs": 0.967,
+   "hype_points": 0,
+   "notes": "A/B title test running (2 titles, same thumbnail). Impressions shown by Studio as 1,4K."
+  }
+ ],
+ "breakdowns": [
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|Browse features",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "Browse features",
+   "share": 0.94,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|External",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "External",
+   "share": 0.016,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|Direct or unknown",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "Direct or unknown",
+   "share": 0.012,
+   "rank": 3,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|Channel pages",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "Channel pages",
+   "share": 0.012,
+   "rank": 4,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|YouTube search",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "YouTube search",
+   "share": 0.008,
+   "rank": 5,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Traffic sources|Others",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Traffic sources",
+   "label": "Others",
+   "share": 0.012,
+   "rank": 6,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|External sites|WhatsApp",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "External sites",
+   "label": "WhatsApp",
+   "share": 0.5,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|External sites|instagram.com",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "External sites",
+   "label": "instagram.com",
+   "share": 0.25,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|External sites|Instagram",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "External sites",
+   "label": "Instagram",
+   "share": 0.125,
+   "rank": 3,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Viewer type|New viewers",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Viewer type",
+   "label": "New viewers",
+   "share": 0.825,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Viewer type|Casual viewers",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Viewer type",
+   "label": "Casual viewers",
+   "share": 0.127,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Viewer type|Regular viewers",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Viewer type",
+   "label": "Regular viewers",
+   "share": 0.048,
+   "rank": 3,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Device (watch time)|Mobile phone",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Device (watch time)",
+   "label": "Mobile phone",
+   "share": 0.733,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Device (watch time)|Computer",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Device (watch time)",
+   "label": "Computer",
+   "share": 0.238,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Device (watch time)|TV",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Device (watch time)",
+   "label": "TV",
+   "share": 0.03,
+   "rank": 3,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Subscriber watch time|Not subscribed",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Subscriber watch time",
+   "label": "Not subscribed",
+   "share": 0.787,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Subscriber watch time|Subscribed",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Subscriber watch time",
+   "label": "Subscribed",
+   "share": 0.213,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Top geographies|Indonesia",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Top geographies",
+   "label": "Indonesia",
+   "share": 0.62,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Subtitles / CC|Indonesian",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Subtitles / CC",
+   "label": "Indonesian",
+   "share": 0.555,
+   "rank": 1,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Subtitles / CC|No subtitles/CC",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Subtitles / CC",
+   "label": "No subtitles/CC",
+   "share": 0.424,
+   "rank": 2,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Subtitles / CC|English (auto-translated)",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Subtitles / CC",
+   "label": "English (auto-translated)",
+   "share": 0.018,
+   "rank": 3,
+   "scope": "Video"
+  },
+  {
+   "key": "2026-10-10-after-9-years|Search terms|lesbian couple vlog",
+   "video_id": "2026-10-10-after-9-years",
+   "group": "Search terms",
+   "label": "lesbian couple vlog",
+   "share": 0.25,
+   "rank": 1,
+   "scope": "Video"
+  }
+ ],
+ "channel": [
+  {
+   "label": "2026-10-19 \u00b7 Last 365 days",
+   "snapshot_date": "2026-10-19",
+   "period": "Last 365 days",
+   "period_start": "2025-10-20",
+   "views": 24213,
+   "watch_hours": 62,
+   "watch_hours_change": -0.52,
+   "subs_gained": 19,
+   "subs_change": -0.65,
+   "videos_views": 1200,
+   "videos_impressions": 17700,
+   "videos_impressions_change": -0.59,
+   "videos_ctr": 0.03,
+   "videos_avg_view_s": 67,
+   "shorts_views": 22300,
+   "shorts_engaged_views": 7400,
+   "shorts_engaged_change": 0.13,
+   "shorts_likes": 161,
+   "shorts_likes_change": 0.59,
+   "shorts_subs": 13,
+   "shorts_subs_change": 0.18,
+   "subs_total": 271,
+   "ypp_watch_hours": 23,
+   "ypp_shorts_views": 48
+  }
+ ]
+}
