@@ -486,7 +486,12 @@
       const ctrList = lf.map((v) => v.ctr).filter((x) => x != null);
       const ctr = withImp.length ? withImp.reduce((s, v) => s + v.ctr * v.impressions, 0) / withImp.reduce((s, v) => s + v.impressions, 0) : avg(ctrList);
       const avd = avg(lf.map((v) => v.avg_pct_viewed).filter((x) => x != null));
-      const sv = avg(sh.map((v) => v.shorts_viewed_pct).filter((x) => x != null));
+      // Shorts viewed: average of that month's tracked Shorts; if none, the channel-level figure from that month's snapshot
+      let sv = avg(sh.map((v) => v.shorts_viewed_pct).filter((x) => x != null));
+      if (sv == null) {
+        const snap = DATA.channel.filter((c) => c.shorts_viewed_pct != null && String(c.snapshot_date).slice(0, 7) === k).pop();
+        if (snap) sv = snap.shorts_viewed_pct;
+      }
       const cadenceMet = Object.entries(CHECKS.cadence).every(([c, n]) => counts[c] >= n);
       return { month: k, inProgress: k === end, counts, ctr, avd, sv, cadenceMet };
     });
@@ -497,7 +502,7 @@
     if (!sec) {
       sec = el('div', 'section'); sec.id = 'monthly-checks';
       sec.innerHTML = '<div class="eyebrow"><svg><use href="#waves"/></svg>Monthly checks</div><h2>Did each month hit the targets?</h2>' +
-        '<div class="muted">CTR 5%+ and average view duration 30%+ (long-form) · Shorts viewed 50%+ · cadence 4 long-form, 4 Shorts, 1 podcast. Each month counts the videos published in it.</div>' +
+        '<div class="muted">CTR 5%+ and average view duration 30%+ (long-form) · Shorts viewed 50%+ (tracked Shorts, or the channel figure in that month’s snapshot) · cadence 4 long-form, 4 Shorts, 1 podcast. Each month counts the videos published in it.</div>' +
         '<div class="card"><div class="tablebox"><table id="checks-table"><thead></thead><tbody></tbody></table></div></div>';
       const body = document.getElementById('channel-body');
       const snapCard = document.getElementById('snap-table')?.closest('.card');
