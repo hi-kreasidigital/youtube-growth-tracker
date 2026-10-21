@@ -32,7 +32,7 @@ const MAPS = {
     'Videos CTR': 'videos_ctr', 'Videos avg view (s)': 'videos_avg_view_s', 'Shorts views': 'shorts_views',
     'Shorts engaged views': 'shorts_engaged_views', 'Shorts engaged views change': 'shorts_engaged_change',
     'Shorts likes': 'shorts_likes', 'Shorts likes change': 'shorts_likes_change', 'Shorts subscribers': 'shorts_subs',
-    'Shorts subscribers change': 'shorts_subs_change', 'Podcast views': 'podcast_views', Notes: 'notes',
+    'Shorts subscribers change': 'shorts_subs_change', 'Podcast views': 'podcast_views', 'Shorts viewed %': 'shorts_viewed_pct', Notes: 'notes',
     'YPP qualified watch hours (365d)': 'ypp_watch_hours', 'YPP qualified Shorts views (90d)': 'ypp_shorts_views',
   },
 };
