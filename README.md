@@ -3,7 +3,7 @@
 This is a static dashboard for GitHub Pages. It reads its numbers from the **YouTube Analytics** base in Airtable.
 
 ```
-Screenshots → Claude → Airtable (Videos · Breakdowns · Channel Snapshots)
+Screenshots → Claude → Airtable (Videos · Channel Snapshots)
                               ↓  GitHub Action, every 6 hours or on demand
                        site/data/data.json → GitHub Pages
 ```
@@ -28,9 +28,8 @@ After that, the page refreshes itself every 6 hours. For an instant update after
 
 | Table | One row per | Used for |
 |---|---|---|
-| Videos | video | Video tab and Compare tab |
-| Breakdowns | video × group × label (Scope = Video), or snapshot date × group × label (Scope = Channel) | Bar breakdowns (traffic sources, devices, geography, …) |
-| Channel Snapshots | snapshot (1st of each month: “Last 365 days”, optionally “Last 90 days” and “Calendar month”) | Channel & YPP tab |
+| Videos | video (Category = Long-form, Shorts or Podcast) | Videos, Shorts and Podcast tabs, monthly checks |
+| Channel Snapshots | monthly snapshot (1st of each month) | Channel & YPP tab: YPP progress, growth chart, Shorts stayed-to-watch fallback |
 
 Don't rename tables or fields. If you add a new field, it shows up in `data.json` automatically under a snake_case name.
 
