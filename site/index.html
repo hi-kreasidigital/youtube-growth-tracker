@@ -33,127 +33,48 @@
 
   <nav class="tabs" role="tablist">
     <button class="tab" role="tab" data-tab="channel" aria-selected="true">Channel &amp; YPP</button>
-    <button class="tab" role="tab" data-tab="video" aria-selected="false">Video</button>
-    <button class="tab" role="tab" data-tab="compare" aria-selected="false">Compare</button>
+    <button class="tab" role="tab" data-tab="videos" aria-selected="false">Videos</button>
+    <button class="tab" role="tab" data-tab="shorts" aria-selected="false">Shorts</button>
+    <button class="tab" role="tab" data-tab="podcast" aria-selected="false">Podcast</button>
   </nav>
 
-  <!-- ============ CHANNEL ============ -->
+  <!-- ============ CHANNEL & YPP ============ -->
   <section class="page" id="page-channel">
-    <div id="channel-empty" class="card empty" hidden>
-      <h2>Channel performance</h2>
-      <p>No channel snapshots yet. They appear here once added to the <b>Channel Snapshots</b> table in Airtable.</p>
+    <div class="section">
+      <div class="eyebrow"><svg><use href="#waves"/></svg>Road to the YouTube Partner Program</div>
+      <h2>Where the channel stands</h2>
+      <div class="muted" id="ypp-sub"></div>
+      <div class="grid three" id="ypp-routes"></div>
     </div>
-    <div id="channel-body" class="page">
-      <div class="section">
-        <div class="eyebrow"><svg><use href="#waves"/></svg>Road to the YouTube Partner Program</div>
-        <h2 id="ypp-title">Where the channel stands</h2>
-        <div class="muted" id="ypp-sub"></div>
-        <div class="grid three" id="ypp-routes"></div>
-      </div>
 
-      <div class="section">
-        <div class="eyebrow"><svg><use href="#waves"/></svg>Latest snapshot</div>
-        <h2 id="snap-title">Last 365 days</h2>
-        <div class="kpis" id="ch-kpis"></div>
+    <div class="section">
+      <div class="eyebrow"><svg><use href="#waves"/></svg>Growth over time</div>
+      <div class="row" style="justify-content:space-between">
+        <h2 id="growth-title">Total subscribers</h2>
+        <select id="growth-metric" aria-label="Metric">
+          <option value="subs_total">Total subscribers</option>
+          <option value="ypp_watch_hours">Qualified watch hours (365 days)</option>
+          <option value="ypp_shorts_views">Qualified Shorts views (90 days)</option>
+        </select>
       </div>
-
-      <div class="section">
-        <div class="eyebrow"><svg><use href="#waves"/></svg>Growth over time</div>
-        <h2>How the numbers move, snapshot to snapshot</h2>
+      <div class="card">
         <div class="muted" id="growth-note"></div>
-        <div class="grid two">
-          <div class="card"><h3>12-month watch hours</h3><div class="muted">Rolling 12-month total at each snapshot: all watch hours vs the qualified hours YPP counts</div><div class="chart-box"><canvas id="ch-hours"></canvas></div></div>
-          <div class="card"><h3>Subscriber growth</h3><div class="muted">Total subscribers at each data entry (line) and the change since the entry before (bars)</div><div class="chart-box"><canvas id="ch-subs"></canvas></div></div>
-        </div>
-        <div class="card" id="monthly-card" hidden>
-          <h3>Month by month</h3><div class="muted">From the calendar-month snapshots</div>
-          <div class="chart-box"><canvas id="ch-monthly"></canvas></div>
-        </div>
-      </div>
-
-      <div class="section">
-        <div class="eyebrow"><svg><use href="#waves"/></svg>Long-form vs Shorts</div>
-        <h2>What each format brings in</h2>
-        <div class="grid" id="fmt-split"></div>
-      </div>
-
-      <div class="section" id="ch-bd-section" hidden>
-        <div class="eyebrow"><svg><use href="#waves"/></svg>Audience</div>
-        <h2>Who watches the channel</h2>
-        <div class="grid three" id="ch-breakdowns"></div>
-      </div>
-
-      <div class="card">
-        <h3>All snapshots</h3>
-        <div class="tablebox"><table id="snap-table"><thead></thead><tbody></tbody></table></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VIDEO ============ -->
-  <section class="page" id="page-video" hidden>
-    <div class="row">
-      <div class="row" id="cat-chips" role="group" aria-label="Category"></div>
-      <select id="video-select" aria-label="Video"></select>
-    </div>
-
-    <div class="card mist" id="video-head">
-      <div class="row"><span class="badge" id="v-cat"></span><span class="muted" id="v-dates"></span></div>
-      <h2 id="v-title"></h2>
-      <p class="muted" id="v-notes" style="margin:0"></p>
-    </div>
-
-    <div class="kpis" id="kpis"></div>
-
-    <div class="grid">
-      <div class="card">
-        <h3>From impression to watch time</h3>
-        <div class="muted">How thumbnail impressions turned into views · since published</div>
-        <div class="funnel" id="funnel"></div>
-      </div>
-      <div class="card">
-        <h3>Against your channel average</h3>
-        <div class="muted">Likes and end-screen clicks · lifetime</div>
-        <div id="bench" class="bars"></div>
+        <div class="chart-box"><canvas id="growth-chart"></canvas></div>
       </div>
     </div>
 
     <div class="section">
-      <div class="eyebrow"><svg><use href="#waves"/></svg>Audience</div>
-      <h2>Who watched and how they found it</h2>
-      <div class="grid three" id="breakdowns"></div>
+      <div class="eyebrow"><svg><use href="#waves"/></svg>Monthly checks</div>
+      <h2>Did each month hit the targets?</h2>
+      <div class="muted">CTR 5%+ and average view duration 30%+ (long-form) · Shorts stayed to watch 50%+ (tracked Shorts, or the channel figure in that month’s snapshot) · cadence 4 long-form, 4 Shorts, 1 podcast. Each month counts the videos published in it.</div>
+      <div class="card"><div class="tablebox"><table id="checks-table"><thead></thead><tbody></tbody></table></div></div>
     </div>
   </section>
 
-  <!-- ============ COMPARE ============ -->
-  <section class="page" id="page-compare" hidden>
-    <div class="row">
-      <div class="row" id="cmp-chips" role="group" aria-label="Category"></div>
-      <select id="cmp-metric" aria-label="Metric"></select>
-    </div>
-    <div class="card">
-      <h3 id="cmp-title">Videos side by side</h3>
-      <div class="muted" id="cmp-note"></div>
-      <div class="chart-box tall"><canvas id="cmp-chart"></canvas></div>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <h3>Reach vs. hold</h3>
-        <div class="muted">Click-through rate (finds an audience) against average % viewed (keeps it). Top-right is best.</div>
-        <div class="chart-box"><canvas id="scatter-chart"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>Format averages</h3>
-        <div class="muted">Average per video in each format</div>
-        <div class="tablebox"><table id="fmt-table"><thead></thead><tbody></tbody></table></div>
-      </div>
-    </div>
-    <div class="card">
-      <h3>All tracked videos</h3>
-      <div class="muted">Click a column to sort, a row to open the video</div>
-      <div class="tablebox"><table id="all-table"><thead></thead><tbody></tbody></table></div>
-    </div>
-  </section>
+  <!-- ============ VIDEOS / SHORTS / PODCAST (filled by app.js) ============ -->
+  <section class="page" id="page-videos" hidden></section>
+  <section class="page" id="page-shorts" hidden></section>
+  <section class="page" id="page-podcast" hidden></section>
 
   <footer><span>Data from YouTube Studio, recorded in Airtable.</span><span>Tara x Mattel · Cerita jujur, langkah nyata.</span></footer>
 </div>
