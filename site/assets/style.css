@@ -140,3 +140,7 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; j
   .hide-sm { display: none; }
   .chart-box { height: 260px; }
 }
+
+/* multi-line text cells (traffic sources, external sites, search terms) */
+td.list { white-space: pre-line; min-width: 13rem; font-size: 14px; line-height: 1.45; vertical-align: top; }
+tbody td { vertical-align: top; }
