@@ -33,6 +33,11 @@ body { background: var(--white); color: var(--navy); font-family: var(--font-bod
 
 header.top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
 .logo { height: 64px; width: auto; display: block; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-badge { width: 68px; height: 68px; display: block; flex: none; }
+.brand-text { display: flex; flex-direction: column; gap: 4px; }
+.brand-wordmark { height: 30px; width: auto; display: block; }
+.brand-tagline { font-family: var(--font-head); font-weight: 600; font-size: 16px; color: var(--muted); letter-spacing: .01em; }
 .head-meta { text-align: right; }
 .updated { font-size: 14px; color: var(--muted); }
 .tagline { font-family: var(--font-quote); font-style: italic; font-weight: 500; color: var(--muted); font-size: 15px; }
@@ -135,6 +140,9 @@ footer { color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; j
   .kpis, .kpis.three, .kpis.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .head-meta { text-align: left; }
   .logo { height: 52px; }
+  .brand-badge { width: 56px; height: 56px; }
+  .brand-wordmark { height: 24px; }
+  .brand-tagline { font-size: 15px; }
 }
 @media (max-width: 640px) {
   .hide-sm { display: none; }
